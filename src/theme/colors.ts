@@ -1,5 +1,5 @@
 export const colors = {
-  gray: {
+  brand: {
     40: { value: "#F7FAFA" },
     50: { value: "#F4F8F9" },
     100: { value: "#E8EEF0" },
