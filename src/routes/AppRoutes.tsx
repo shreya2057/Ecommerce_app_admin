@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import { ROUTES } from "./routes.constants";
 import { Login } from "../pages/Auth/Login";
 
@@ -9,7 +9,7 @@ const publicRoutes = [
   },
   {
     path: "*",
-    element: <Login />,
+    element: <Navigate to={ROUTES.LOGIN} />,
   },
 ];
 
