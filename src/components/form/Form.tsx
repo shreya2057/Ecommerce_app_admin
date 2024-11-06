@@ -6,6 +6,7 @@ import {
   HStack,
   Stack,
   TextProps,
+  VStack,
 } from "@chakra-ui/react";
 
 export const Form = ({
@@ -17,28 +18,40 @@ export const Form = ({
   cancelButtonProps,
   legendProps,
   formProps,
+  buttonText,
   onSubmit,
 }: FormProps) => {
   return (
-    <Fieldset.Root size="lg" maxW="md" {...formProps} onSubmit={onSubmit}>
-      <Stack width={"100%"} justifyContent={"center"}>
-        <Fieldset.Legend {...legendProps}>{legend}</Fieldset.Legend>
-        <Fieldset.HelperText>{helperText}</Fieldset.HelperText>
-      </Stack>
+    <VStack onSubmit={onSubmit} as={"form"} width={"100%"}>
+      <Fieldset.Root size="lg" maxW="md" {...formProps}>
+        <Stack width={"100%"} justifyContent={"center"}>
+          <Fieldset.Legend {...legendProps}>{legend}</Fieldset.Legend>
+          <Fieldset.HelperText>{helperText}</Fieldset.HelperText>
+        </Stack>
 
-      <Fieldset.Content>{children}</Fieldset.Content>
+        <Fieldset.Content>{children}</Fieldset.Content>
 
-      <HStack>
-        {hasCancel && (
-          <Button width={"100%"} {...cancelButtonProps}>
-            Cancel
+        <HStack>
+          {hasCancel && (
+            <Button width={"100%"} {...cancelButtonProps}>
+              Cancel
+            </Button>
+          )}
+          <Button
+            width={"100%"}
+            fontSize={"md"}
+            fontWeight={"bold"}
+            letterSpacing={1}
+            bg={"brand.700"}
+            color={"gray.100"}
+            {...buttonProps}
+            type="submit"
+          >
+            {buttonText}
           </Button>
-        )}
-        <Button type="submit" width={"100%"} bg={"brand.700"} {...buttonProps}>
-          Submit
-        </Button>
-      </HStack>
-    </Fieldset.Root>
+        </HStack>
+      </Fieldset.Root>
+    </VStack>
   );
 };
 
@@ -51,5 +64,6 @@ type FormProps = {
   cancelButtonProps?: ButtonProps;
   legendProps?: TextProps;
   formProps?: FieldsetRootProps;
+  buttonText: string;
   onSubmit?: () => void;
 };

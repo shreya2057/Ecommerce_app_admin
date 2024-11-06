@@ -1,12 +1,11 @@
 import { Form } from "@/components/form/Form";
 import { FormControl } from "@/components/form/FormControl";
 import { Box, Flex, VStack } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
 import { RiShoppingCartFill } from "react-icons/ri";
+import { useLoginForm } from "./hooks/useLoginForm";
 
 export const Login = () => {
-  const { control } = useForm();
-
+  const { loginMethods, onSubmit } = useLoginForm();
   const legend = " Welcome to Ecommerce app";
 
   return (
@@ -59,26 +58,28 @@ export const Login = () => {
             shadow: "lg",
             background: "gradientGrayLight",
           }}
+          buttonText="Login"
+          onSubmit={loginMethods.handleSubmit(onSubmit)}
         >
           <VStack gap={6}>
             <FormControl
               inputControl="input"
               name="email"
-              control={control}
+              control={loginMethods.control}
               label="Email"
               bg={"white"}
               shadow={"md"}
-              borderWidth={0}
+              borderWidth={1}
               placeholder="Enter your email"
             />
             <FormControl
               name="password"
               inputControl="password"
-              control={control}
+              control={loginMethods.control}
               label="Password"
               bg={"white"}
               shadow={"md"}
-              borderWidth={0}
+              borderWidth={1}
               placeholder="Enter password"
             />
           </VStack>
