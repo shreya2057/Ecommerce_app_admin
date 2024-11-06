@@ -1,8 +1,8 @@
 import { Form } from "@/components/form/Form";
+import { FormControl } from "@/components/form/FormControl";
 import { Box, Flex, VStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { RiShoppingCartFill } from "react-icons/ri";
-import { FormControl } from "../../components/form/FormControl";
 
 export const Login = () => {
   const { control } = useForm();
