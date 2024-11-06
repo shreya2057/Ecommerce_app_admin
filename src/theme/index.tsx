@@ -4,6 +4,10 @@ const config = defineConfig({
   theme: {
     tokens: {
       colors: { ...colors },
+      fonts: {
+        heading: { value: "Nunito-Regular, sans-serif" },
+        body: { value: "Nunito-Regular, sans-serif" },
+      },
     },
   },
 });

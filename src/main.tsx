@@ -5,6 +5,7 @@ import { theme } from "./theme/index.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AppRoutes } from "./routes/AppRoutes.tsx";
 import { BrowserRouter } from "react-router-dom";
+import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -2,7 +2,7 @@ import { FieldValues, useController } from "react-hook-form";
 import { Field } from "../ui/field";
 import { PasswordInput } from "../ui/password-input";
 import { InputProps } from "./Input";
-import { Text } from "@chakra-ui/react";
+import { Label } from "./Label";
 
 export const Password = <TFieldValues extends FieldValues>({
   label,
@@ -17,18 +17,14 @@ export const Password = <TFieldValues extends FieldValues>({
   const { onChange, value } = field;
   return (
     <Field
-      label={
-        <Text fontWeight={"bold"} color={"brand.400"}>
-          {label}
-        </Text>
-      }
+      label={<Label label={label} />}
       invalid={!!error?.message}
       errorText={error?.message}
     >
       <PasswordInput
         onChange={onChange}
         value={value}
-        _placeholder={{ color: "brand.300" }}
+        _placeholder={{ color: "brand.300", fontSize: "md" }}
         _focusVisible={{ borderColor: "brand.300", borderWidth: 1 }}
         focusRing={"none"}
         {...rest}
