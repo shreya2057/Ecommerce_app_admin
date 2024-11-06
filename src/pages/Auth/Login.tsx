@@ -1,10 +1,13 @@
-import { Box, Button, Flex, Heading, VStack } from "@chakra-ui/react";
+import { Form } from "@/components/form/Form";
+import { Box, Flex, VStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { RiShoppingCartFill } from "react-icons/ri";
 import { FormControl } from "../../components/form/FormControl";
 
 export const Login = () => {
   const { control } = useForm();
+
+  const legend = " Welcome to Ecommerce app";
 
   return (
     <Flex
@@ -41,45 +44,45 @@ export const Login = () => {
         color={"gray.600"}
         bgColor={{ sm: "brand.40" }}
       >
-        <VStack
-          width={"100%"}
-          gap={6}
-          justifyContent={"center"}
-          as={"form"}
-          p={{ base: 8, sm: 10 }}
-          rounded={"xl"}
-          shadow={"lg"}
-          background={"gradientGrayLight"}
+        <Form
+          legend={legend}
+          legendProps={{
+            textAlign: "center",
+            fontWeight: "black",
+            color: "brand.500",
+            fontSize: "xl",
+          }}
+          formProps={{
+            width: "100%",
+            p: { base: 8, sm: 10 },
+            rounded: "xl",
+            shadow: "lg",
+            background: "gradientGrayLight",
+          }}
         >
-          <Heading fontSize={{ base: "lg", sm: "xl" }}>
-            Welcome to Ecommerce app
-          </Heading>
-          <FormControl
-            inputControl="input"
-            name="email"
-            control={control}
-            label="Email"
-            bg={"white"}
-            shadow={"md"}
-            borderWidth={0}
-            placeholder="Enter your email"
-          />
-          <FormControl
-            name="password"
-            inputControl="password"
-            control={control}
-            label="Password"
-            bg={"white"}
-            shadow={"md"}
-            borderWidth={0}
-            placeholder="Enter password"
-          />
-          <Flex width={"100%"}>
-            <Button type="submit" w={"100%"}>
-              Login
-            </Button>
-          </Flex>
-        </VStack>
+          <VStack gap={6}>
+            <FormControl
+              inputControl="input"
+              name="email"
+              control={control}
+              label="Email"
+              bg={"white"}
+              shadow={"md"}
+              borderWidth={0}
+              placeholder="Enter your email"
+            />
+            <FormControl
+              name="password"
+              inputControl="password"
+              control={control}
+              label="Password"
+              bg={"white"}
+              shadow={"md"}
+              borderWidth={0}
+              placeholder="Enter password"
+            />
+          </VStack>
+        </Form>
       </VStack>
     </Flex>
   );
