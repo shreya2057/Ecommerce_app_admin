@@ -5,7 +5,7 @@ import { RiShoppingCartFill } from "react-icons/ri";
 import { useLoginForm } from "./hooks/useLoginForm";
 
 export const Login = () => {
-  const { loginMethods, onSubmit } = useLoginForm();
+  const { loginMethods, onSubmit, isLoading } = useLoginForm();
   const legend = " Welcome to Ecommerce app";
 
   return (
@@ -60,6 +60,7 @@ export const Login = () => {
           }}
           buttonText="Login"
           onSubmit={loginMethods.handleSubmit(onSubmit)}
+          buttonProps={{ loading: isLoading }}
         >
           <VStack gap={6}>
             <FormControl
