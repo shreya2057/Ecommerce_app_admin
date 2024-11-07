@@ -1,6 +1,4 @@
 import {
-  Button,
-  ButtonProps,
   Fieldset,
   FieldsetRootProps,
   HStack,
@@ -8,6 +6,7 @@ import {
   TextProps,
   VStack,
 } from "@chakra-ui/react";
+import { Button, ButtonProps } from "../ui/button";
 
 export const Form = ({
   legend,

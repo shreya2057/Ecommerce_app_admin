@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { loginSchema } from "../schema/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLoginQuery } from "./useLoginQuery";
 
 const initialValues = {
   email: "",
@@ -14,9 +15,11 @@ export const useLoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
+  const { mutateAsync: login, isLoading } = useLoginQuery();
+
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
-    console.log(data);
+    login(data);
   };
 
-  return { loginMethods: formMethods, onSubmit };
+  return { loginMethods: formMethods, onSubmit, isLoading };
 };
