@@ -6,50 +6,87 @@ import { ProductDetail } from "@/pages/Products/ProductDetail";
 import { Orders } from "@/pages/Orders";
 import { Users } from "@/pages/Users/";
 import { ROUTES } from "./routes.constants";
+import { Layout } from "@/components/layout/Layout";
 
 export const privateRoutes = [
   {
     path: ROUTES.DASHBOARD,
-    element: <Dashboard />,
+    element: (
+      <Layout>
+        <Dashboard />
+      </Layout>
+    ),
   },
   {
     path: ROUTES.CATEGORIES,
-    element: <Categories />,
+    element: (
+      <Layout>
+        <Categories />
+      </Layout>
+    ),
   },
   {
     path: ROUTES.PRODUCTS,
-    element: <Products />,
+    element: (
+      <Layout>
+        <Products />
+      </Layout>
+    ),
   },
   {
     path: ROUTES.FEATURED_PRODUCTS,
-    element: <FeaturedProducts />,
+    element: (
+      <Layout>
+        <FeaturedProducts />
+      </Layout>
+    ),
   },
   {
     path: ROUTES.PRODUCT_DETAIL,
-    element: <ProductDetail />,
+    element: (
+      <Layout>
+        <ProductDetail />
+      </Layout>
+    ),
   },
   {
     path: ROUTES.IMPORTANT_ORDERS,
-    element: <Orders orderType="importantOrders" />,
+    element: (
+      <Layout>
+        <Orders orderType="importantOrders" />
+      </Layout>
+    ),
   },
   {
     path: ROUTES.PENDING_ORDERS,
-    element: <Orders orderType="pendingOrders" />,
+    element: (
+      <Layout>
+        <Orders orderType="pendingOrders" />
+      </Layout>
+    ),
   },
   {
     path: ROUTES.DELIVERED_ORDERS,
-    element: <Orders orderType="deliveredOrders" />,
+    element: (
+      <Layout>
+        <Orders orderType="deliveredOrders" />
+      </Layout>
+    ),
   },
   {
     path: ROUTES.PACKED_ORDERS,
-    element: <Orders orderType="packedOrders" />,
-  },
-  {
-    path: ROUTES.ALL_ORDERS,
-    element: <Orders orderType="allOrders" />,
+    element: (
+      <Layout>
+        <Orders orderType="packedOrders" />
+      </Layout>
+    ),
   },
   {
     path: ROUTES.USERS,
-    element: <Users />,
+    element: (
+      <Layout>
+        <Users />
+      </Layout>
+    ),
   },
 ];
