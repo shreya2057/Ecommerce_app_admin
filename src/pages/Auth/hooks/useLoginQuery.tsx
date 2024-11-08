@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { z } from "zod";
 import { loginSchema } from "../schema/loginSchema";
 import { httpClient } from "@/axios/instance";
@@ -16,6 +16,7 @@ const loginQuery = (data: z.infer<typeof loginSchema>) => {
 
 export const useLoginQuery = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: loginQuery,
     onSuccess: (response) => {
@@ -25,6 +26,7 @@ export const useLoginQuery = () => {
       if (role === "admin") {
         TokenService.setToken("access_token", accessToken);
         TokenService.setToken("refresh_token", refreshToken);
+        queryClient.invalidateQueries("is-authenticated");
         navigate(ROUTES.DASHBOARD);
       } else {
         toast.error("Unauthorized user");
