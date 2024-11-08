@@ -1,11 +1,11 @@
-import Cookies from "js-cookie";
+import Cookie from "js-cookie";
 
-const getToken = async (token_name: string) => {
-  return Cookies.get(token_name);
+const getToken = (token_name: string) => {
+  return Cookie.get(token_name);
 };
 
 const setToken = (token_name: string, token: string) => {
-  return Cookies.set(token_name, token);
+  return Cookie.set(token_name, token);
 };
 
 const getTokenDetails = (token: string) => {

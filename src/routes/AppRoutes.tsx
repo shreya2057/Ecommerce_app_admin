@@ -1,6 +1,9 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import { ROUTES } from "./routes.constants";
 import { Login } from "../pages/Auth/Login";
+import { useIsAuthenticated } from "@/hooks/useIsAuthenticated";
+import { privateRoutes } from "./privateRoutes";
+import { Spinner } from "@chakra-ui/react";
 
 const publicRoutes = [
   {
@@ -14,5 +17,12 @@ const publicRoutes = [
 ];
 
 export const AppRoutes = () => {
-  return useRoutes(publicRoutes);
+  const { data: isAuthenticated, isLoading } = useIsAuthenticated();
+
+  const router = useRoutes(
+    isAuthenticated ? [...privateRoutes] : [...publicRoutes]
+  );
+
+  if (isLoading) return <Spinner />;
+  else return router;
 };
