@@ -14,7 +14,7 @@ export const DataTable = <T,>({ columns, data }: DataTableProps<T>) => {
   });
   return (
     <Table.ScrollArea w={'100%'} maxW={'100%'} rounded={'md'}>
-      <Table.Root size="sm" variant="line" fontSize={'md'}>
+      <Table.Root size="sm" variant="line" fontSize={'md'} striped>
         <Table.Header>
           {table?.getHeaderGroups().map((headerGroup) => (
             <Table.Row bg={'brand.300'} key={headerGroup.id}>
