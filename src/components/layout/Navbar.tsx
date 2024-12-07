@@ -7,7 +7,6 @@ export const Navbar = () => {
     <HStack
       width={'100%'}
       bg={'white'}
-      rounded={'lg'}
       borderBottomWidth={1}
       pb={4}
       justifyContent={'space-between'}
