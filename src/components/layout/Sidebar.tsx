@@ -53,15 +53,26 @@ export const Sidebar = () => {
   const pathname = useLocation().pathname;
   return (
     <VStack
-      bg={'gradientGray'}
       py={6}
-      px={6}
-      width={60}
+      px={4}
+      width={72}
       alignItems={'start'}
       justifyContent={'space-between'}
+      position={'fixed'}
+      h={'100%'}
     >
-      <VStack alignItems={'start'}>
-        <HStack gap={0} pb={6}>
+      <VStack alignItems={'start'} width={'100%'}>
+        <HStack
+          gap={0}
+          py={2}
+          px={4}
+          bg={'white'}
+          width={'100%'}
+          rounded={'md'}
+          borderWidth={1}
+          borderColor={'brand.100'}
+          mb={6}
+        >
           <Box
             background={'brand.500'}
             p={1.5}
@@ -71,21 +82,21 @@ export const Sidebar = () => {
           >
             <RiShoppingCartFill />
           </Box>
-          <Text fontSize={'xl'} fontWeight={'black'} color={'gray.100'} px={2}>
+          <Text fontSize={'lg'} fontWeight={'black'} color={'brand.400'} px={2}>
             Ecommerce App
           </Text>
         </HStack>
         {items.map((item) => (
           <HStack
             rounded={'md'}
-            color={'white'}
-            px={4}
+            color={'brand.500'}
+            px={2}
             py={1}
             width={'100%'}
-            _hover={{ bg: 'brand.500' }}
+            _hover={{ bg: 'brand.200' }}
             key={item?.title}
             cursor={'pointer'}
-            bg={pathname === item?.path ? 'brand.500' : 'transparent'}
+            bg={pathname === item?.path ? 'brand.200' : 'transparent'}
             onClick={() => navigate(item?.path)}
           >
             {item?.icon}

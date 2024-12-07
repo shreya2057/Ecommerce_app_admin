@@ -13,15 +13,16 @@ export const DataTable = <T,>({ columns, data }: DataTableProps<T>) => {
     getCoreRowModel: getCoreRowModel(),
   });
   return (
-    <Table.ScrollArea w={'100%'} maxW={'100%'} rounded={'md'}>
-      <Table.Root size="sm" variant="line" fontSize={'md'} striped>
+    <Table.ScrollArea w={'100%'} maxW={'100%'} rounded={'lg'}>
+      <Table.Root size="sm" fontSize={'md'} width={'100%'}>
         <Table.Header>
           {table?.getHeaderGroups().map((headerGroup) => (
-            <Table.Row bg={'brand.300'} key={headerGroup.id}>
+            <Table.Row bg={'brand.100'} key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <Table.ColumnHeader
                   px={6}
-                  color={'white'}
+                  py={4}
+                  color={'brand.600'}
                   fontWeight={'bold'}
                   key={header.id}
                 >
@@ -40,7 +41,7 @@ export const DataTable = <T,>({ columns, data }: DataTableProps<T>) => {
           {table.getRowModel().rows.map((row) => (
             <Table.Row key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <Table.Cell px={6} key={cell.id}>
+                <Table.Cell px={6} py={4} key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </Table.Cell>
               ))}

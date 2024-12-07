@@ -7,6 +7,7 @@ import { CategoryType } from './type';
 import { DialogBox } from '@/components/modal';
 import { FormControl } from '@/components/form/FormControl';
 import { useCategoryForm } from './hooks/useCategoryForm';
+import { Switch } from '@/components/ui/switch';
 
 export const Categories = () => {
   const { data: categories } = useGetCategories();
@@ -28,6 +29,15 @@ export const Categories = () => {
     {
       header: 'Active',
       accessorKey: 'is_active',
+      cell: ({ row: { original } }) => {
+        return (
+          <Switch
+            defaultChecked={original?.is_active}
+            colorPalette={'brand'}
+            variant={'raised'}
+          />
+        );
+      },
     },
   ];
 
@@ -41,8 +51,8 @@ export const Categories = () => {
           customButton={
             <Button
               alignSelf={'end'}
-              bg={'brand.400'}
-              border={0}
+              variant={'surface'}
+              colorPalette={'brand'}
               _hover={{ bg: 'brand.300' }}
               fontWeight={'bold'}
             >
