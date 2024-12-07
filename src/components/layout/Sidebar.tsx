@@ -55,7 +55,7 @@ export const Sidebar = () => {
     <VStack
       py={6}
       px={4}
-      width={72}
+      width={60}
       alignItems={'start'}
       justifyContent={'space-between'}
       position={'fixed'}
