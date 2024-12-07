@@ -1,4 +1,4 @@
-import { Button, DialogRootProps } from '@chakra-ui/react';
+import { DialogRootProps } from '@chakra-ui/react';
 import {
   DialogActionTrigger,
   DialogBackdrop,
@@ -12,6 +12,7 @@ import {
   DialogTrigger,
 } from '../ui/dialog';
 import { useState } from 'react';
+import { Button } from '../ui/button';
 
 export const DialogBox = ({
   dialogProps,
@@ -19,6 +20,7 @@ export const DialogBox = ({
   children,
   customButton,
   headerTitle,
+  isLoading,
   onSubmit,
 }: DialogBoxProps) => {
   const [open, setOpen] = useState(false);
@@ -55,9 +57,11 @@ export const DialogBox = ({
           </DialogActionTrigger>
           <Button
             type="button"
+            variant={'solid'}
+            bg={'brand.500'}
             onClick={onSave}
-            bg={'brand.400'}
             _hover={{ bg: 'brand.300' }}
+            loading={isLoading}
           >
             Save
           </Button>

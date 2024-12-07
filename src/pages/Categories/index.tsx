@@ -31,7 +31,11 @@ export const Categories = () => {
       accessorKey: 'is_active',
       cell: ({ row: { original } }) => {
         return (
-          <Switch defaultChecked={original?.is_active} colorPalette={'brand'} />
+          <Switch
+            defaultChecked={original?.is_active}
+            colorPalette={'brand'}
+            variant={'raised'}
+          />
         );
       },
     },
@@ -47,8 +51,8 @@ export const Categories = () => {
           customButton={
             <Button
               alignSelf={'end'}
-              bg={'brand.400'}
-              border={0}
+              variant={'surface'}
+              colorPalette={'brand'}
               _hover={{ bg: 'brand.300' }}
               fontWeight={'bold'}
             >
