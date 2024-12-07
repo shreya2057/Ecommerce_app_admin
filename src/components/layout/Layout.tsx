@@ -17,7 +17,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         width={'100%'}
         overflow={'hidden'}
         flex={1}
-        ml={72}
+        ml={60}
         px={10}
         py={4}
         bg={'white'}

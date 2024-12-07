@@ -13,7 +13,7 @@ export const Navbar = () => {
       justifyContent={'space-between'}
     >
       <HStack
-        fontSize={'lg'}
+        fontSize={'md'}
         fontWeight={'bold'}
         color={'brand.500'}
         borderWidth={1}
