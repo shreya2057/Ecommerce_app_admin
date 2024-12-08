@@ -6,11 +6,17 @@ import { useCategoryForm } from '../hooks/useCategoryForm';
 import { useEffect, useState } from 'react';
 import { useGetCategoryDetail } from '../hooks/useCategoryQuery';
 import { Spinner, VStack } from '@chakra-ui/react';
+import { z } from 'zod';
+import { categorySchema } from '../schema/caetgorySchema';
 
 export const CategoryModal = ({ id }: { id: string }) => {
-  const { categoryMethod, onSubmit, isLoading } = useCategoryForm();
+  const { categoryMethod, onEditSubmit, isEditLoading } = useCategoryForm();
   const [isEdit, setIsEdit] = useState(false);
   const [currentId, setId] = useState('');
+
+  const onSubmit = (data: z.infer<typeof categorySchema>) => {
+    onEditSubmit({ name: data?.name, id: currentId });
+  };
 
   const { data: categoryDetail, isLoading: getCategoryLoading } =
     useGetCategoryDetail({
@@ -44,13 +50,14 @@ export const CategoryModal = ({ id }: { id: string }) => {
             setId(id);
             setIsEdit(true);
           }}
+          loading={isEditLoading}
         >
           <FaEdit />
         </Button>
       }
       dialogProps={{ size: 'lg' }}
       onSubmit={categoryMethod.handleSubmit(onSubmit)}
-      isLoading={isLoading || getCategoryLoading}
+      isLoading={isEditLoading || getCategoryLoading}
       headerTitle="Add Category"
       onClose={closeHandler}
     >

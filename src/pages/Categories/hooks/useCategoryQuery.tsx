@@ -65,3 +65,36 @@ export const useGetCategoryDetail = ({
     enabled: !!id && !isDisabled,
   });
 };
+
+const updateCategory = (data: {
+  name?: string;
+  is_active?: boolean;
+  id: string;
+}) => {
+  const { id, ...rest } = data;
+  return httpClient.patch(
+    pathWithSlash(API_ENDPOINTS.CATEGORIES.UPDATE_DETAIL, { id: id }),
+    rest,
+  );
+};
+
+export const useUpdateCategory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: [API_ENDPOINTS.CATEGORIES.UPDATE_DETAIL],
+    mutationFn: updateCategory,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [API_ENDPOINTS.CATEGORIES.GET_DETAIL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [API_ENDPOINTS.CATEGORIES.GET],
+        refetchInactive: false,
+      });
+      toast.success('Category updated successfully');
+    },
+    onError: (error: AxiosError<ErrorType>) => {
+      toast.error(error?.response?.data?.message ?? '');
+    },
+  });
+};

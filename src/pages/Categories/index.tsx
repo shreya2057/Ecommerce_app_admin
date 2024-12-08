@@ -14,7 +14,8 @@ import { MdDelete } from 'react-icons/md';
 
 export const Categories = () => {
   const { data: categories, isLoading: isListLoading } = useGetCategories();
-  const { categoryMethod, onSubmit, isLoading } = useCategoryForm();
+  const { categoryMethod, onSubmit, isLoading, onEditSubmit, isEditLoading } =
+    useCategoryForm();
 
   const closeHandler = () => {
     categoryMethod.reset({ name: '' });
@@ -40,6 +41,10 @@ export const Categories = () => {
         return (
           <Switch
             defaultChecked={original?.is_active}
+            onCheckedChange={(e) =>
+              onEditSubmit({ is_active: e.checked, id: original?._id })
+            }
+            disabled={isEditLoading}
             colorPalette={'brand'}
             variant={'raised'}
           />
