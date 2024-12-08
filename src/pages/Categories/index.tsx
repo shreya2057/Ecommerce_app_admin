@@ -9,10 +9,16 @@ import { FormControl } from '@/components/form/FormControl';
 import { useCategoryForm } from './hooks/useCategoryForm';
 import { Switch } from '@/components/ui/switch';
 import { NotFound } from '@/components/ErrorPage';
+import { CategoryModal } from './component/CategoryModal';
+import { MdDelete } from 'react-icons/md';
 
 export const Categories = () => {
   const { data: categories, isLoading: isListLoading } = useGetCategories();
   const { categoryMethod, onSubmit, isLoading } = useCategoryForm();
+
+  const closeHandler = () => {
+    categoryMethod.reset({ name: '' });
+  };
 
   const columns: TableOptions<CategoryType>['columns'] = [
     {
@@ -28,7 +34,7 @@ export const Categories = () => {
       accessorKey: '_id',
     },
     {
-      header: 'Active',
+      header: 'Active Status',
       accessorKey: 'is_active',
       cell: ({ row: { original } }) => {
         return (
@@ -37,6 +43,19 @@ export const Categories = () => {
             colorPalette={'brand'}
             variant={'raised'}
           />
+        );
+      },
+    },
+    {
+      header: 'Actions',
+      cell: ({ row: { original } }) => {
+        return (
+          <HStack gap={0}>
+            <CategoryModal id={original?._id} />
+            <Button variant={'ghost'} color={'brand.500'} px={0}>
+              <MdDelete />
+            </Button>
+          </HStack>
         );
       },
     },
@@ -65,6 +84,7 @@ export const Categories = () => {
           onSubmit={categoryMethod.handleSubmit(onSubmit)}
           isLoading={isLoading}
           headerTitle="Add Category"
+          onClose={closeHandler}
         >
           <FormControl
             control={categoryMethod.control}

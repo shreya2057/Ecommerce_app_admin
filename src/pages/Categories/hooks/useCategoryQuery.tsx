@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { z } from 'zod';
 import { categorySchema } from '../schema/caetgorySchema';
 import { CategoryType } from '../type';
+import { pathWithSlash } from '@/utils/pathWithSlash';
 
 export const getCategoriesList = () => {
   return httpClient.get<AxiosResponse<CategoryType[]>>(
@@ -41,5 +42,26 @@ export const useAddCategory = () => {
     onError: (error: AxiosError<ErrorType>) => {
       toast.error(error?.response?.data?.message ?? '');
     },
+  });
+};
+
+const getCategoryDetail = (id: string) => {
+  return httpClient.get<AxiosResponse<CategoryType>>(
+    pathWithSlash(API_ENDPOINTS.CATEGORIES.GET_DETAIL, { id }),
+  );
+};
+
+export const useGetCategoryDetail = ({
+  id,
+  isDisabled,
+}: {
+  id: string;
+  isDisabled: boolean;
+}) => {
+  return useQuery({
+    queryKey: [API_ENDPOINTS.CATEGORIES.GET_DETAIL, id],
+    queryFn: () => getCategoryDetail(id),
+    select: (response) => response?.data?.data,
+    enabled: !!id && !isDisabled,
   });
 };

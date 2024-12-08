@@ -22,6 +22,8 @@ export const DialogBox = ({
   headerTitle,
   isLoading,
   onSubmit,
+  onClose,
+  id,
 }: DialogBoxProps) => {
   const [open, setOpen] = useState(false);
   const onSave = async () => {
@@ -31,7 +33,9 @@ export const DialogBox = ({
   return (
     <DialogRoot
       {...dialogProps}
+      id={id}
       open={open}
+      onExitComplete={onClose}
       onOpenChange={(e) => setOpen(e.open)}
     >
       <DialogBackdrop />
@@ -80,4 +84,6 @@ type DialogBoxProps = {
   headerTitle?: string;
   isLoading: boolean;
   onSubmit: () => Promise<void>;
+  onClose?: () => void;
+  id?: string;
 };
