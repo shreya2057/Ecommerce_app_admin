@@ -1,5 +1,5 @@
 import { DataTable } from '@/components/table/DataTable';
-import { Button, HStack, Text, VStack } from '@chakra-ui/react';
+import { Button, HStack, Spinner, Text, VStack } from '@chakra-ui/react';
 import { TableOptions } from '@tanstack/react-table';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import { useGetCategories } from './hooks/useCategoryQuery';
@@ -8,9 +8,10 @@ import { DialogBox } from '@/components/modal';
 import { FormControl } from '@/components/form/FormControl';
 import { useCategoryForm } from './hooks/useCategoryForm';
 import { Switch } from '@/components/ui/switch';
+import { NotFound } from '@/components/ErrorPage';
 
 export const Categories = () => {
-  const { data: categories } = useGetCategories();
+  const { data: categories, isLoading: isListLoading } = useGetCategories();
   const { categoryMethod, onSubmit, isLoading } = useCategoryForm();
 
   const columns: TableOptions<CategoryType>['columns'] = [
@@ -42,7 +43,7 @@ export const Categories = () => {
   ];
 
   return (
-    <VStack width={'100%'} alignItems={'start'} gap={5}>
+    <VStack width={'100%'} alignItems={'start'} gap={5} flex={1}>
       <HStack width={'100%'} justifyContent={'space-between'}>
         <Text fontSize={'xl'} fontWeight={'extrabold'} color={'brand.600'}>
           Product Categories
@@ -73,7 +74,15 @@ export const Categories = () => {
           />
         </DialogBox>
       </HStack>
-      <DataTable columns={columns} data={categories ?? []} />
+      {isListLoading ? (
+        <VStack width={'100%'} flex={1} justifyContent={'center'}>
+          <Spinner size={'lg'} />
+        </VStack>
+      ) : categories?.length && categories?.length < 0 ? (
+        <NotFound message="There are no categories" />
+      ) : (
+        <DataTable columns={columns} data={categories ?? []} />
+      )}
     </VStack>
   );
 };

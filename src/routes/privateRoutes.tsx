@@ -1,12 +1,13 @@
-import { Dashboard } from "@/pages/Dashboard";
-import { Categories } from "@/pages/Categories";
-import { Products } from "@/pages/Products/Products";
-import { FeaturedProducts } from "@/pages/Products/FeaturedProducts";
-import { ProductDetail } from "@/pages/Products/ProductDetail";
-import { Orders } from "@/pages/Orders";
-import { Users } from "@/pages/Users/";
-import { ROUTES } from "./routes.constants";
-import { Layout } from "@/components/layout/Layout";
+import { Dashboard } from '@/pages/Dashboard';
+import { Categories } from '@/pages/Categories';
+import { Products } from '@/pages/Products/Products';
+import { FeaturedProducts } from '@/pages/Products/FeaturedProducts';
+import { ProductDetail } from '@/pages/Products/ProductDetail';
+import { Orders } from '@/pages/Orders';
+import { Users } from '@/pages/Users/';
+import { ROUTES } from './routes.constants';
+import { Layout } from '@/components/layout/Layout';
+import { PageNotFound } from '@/components/ErrorPage';
 
 export const privateRoutes = [
   {
@@ -88,5 +89,9 @@ export const privateRoutes = [
         <Users />
       </Layout>
     ),
+  },
+  {
+    path: '*',
+    element: <PageNotFound />,
   },
 ];
