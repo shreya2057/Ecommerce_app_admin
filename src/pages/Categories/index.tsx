@@ -1,16 +1,19 @@
+import { NotFound } from '@/components/ErrorPage';
+import { FormControl } from '@/components/form/FormControl';
+import { Switch } from '@/components/form/Switch';
+import { DialogBox } from '@/components/modal';
 import { DataTable } from '@/components/table/DataTable';
-import { Button, HStack, Spinner, Text, VStack } from '@chakra-ui/react';
+import { HStack, Spinner, Text, VStack } from '@chakra-ui/react';
 import { TableOptions } from '@tanstack/react-table';
 import { IoAddCircleOutline } from 'react-icons/io5';
+import { MdDelete } from 'react-icons/md';
+import { CategoryModal } from './component/CategoryModal';
+import { useCategoryForm } from './hooks/useCategoryForm';
 import { useGetCategories } from './hooks/useCategoryQuery';
 import { CategoryType } from './type';
-import { DialogBox } from '@/components/modal';
-import { FormControl } from '@/components/form/FormControl';
-import { useCategoryForm } from './hooks/useCategoryForm';
-import { Switch } from '@/components/ui/switch';
-import { NotFound } from '@/components/ErrorPage';
-import { CategoryModal } from './component/CategoryModal';
-import { MdDelete } from 'react-icons/md';
+import { Button } from '@/components/ui/button';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/routes/routes.constants';
 
 export const Categories = () => {
   const { data: categories, isLoading: isListLoading } = useGetCategories();
@@ -20,6 +23,8 @@ export const Categories = () => {
   const closeHandler = () => {
     categoryMethod.reset({ name: '' });
   };
+
+  const navigate = useNavigate();
 
   const columns: TableOptions<CategoryType>['columns'] = [
     {
@@ -31,8 +36,25 @@ export const Categories = () => {
       accessorKey: 'name',
     },
     {
-      header: 'Category ID',
-      accessorKey: '_id',
+      header: 'No of products',
+    },
+    {
+      header: 'View Products',
+      cell: ({ row: { original } }) => {
+        return (
+          <Button
+            colorPalette={'brand'}
+            variant={'surface'}
+            onClick={() =>
+              navigate(
+                generatePath(ROUTES.PRODUCTS, { category: original?._id }),
+              )
+            }
+          >
+            View Products
+          </Button>
+        );
+      },
     },
     {
       header: 'Active Status',
@@ -40,13 +62,9 @@ export const Categories = () => {
       cell: ({ row: { original } }) => {
         return (
           <Switch
-            defaultChecked={original?.is_active}
-            onCheckedChange={(e) =>
-              onEditSubmit({ is_active: e.checked, id: original?._id })
-            }
-            disabled={isEditLoading}
-            colorPalette={'brand'}
-            variant={'raised'}
+            value={original?.is_active}
+            onChange={(e) => onEditSubmit({ is_active: e, id: original?._id })}
+            isDisabled={isEditLoading}
           />
         );
       },

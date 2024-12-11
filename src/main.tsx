@@ -11,9 +11,20 @@ import { Toaster } from 'react-hot-toast';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Error } from './components/ErrorPage';
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: true,
+      staleTime: 30 * 1000,
+    },
+  },
+});
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={new QueryClient()}>
+    <QueryClientProvider client={queryClient}>
       <ChakraProvider value={theme}>
         <ErrorBoundary FallbackComponent={Error}>
           <HelmetProvider>
