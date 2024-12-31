@@ -10,9 +10,10 @@ import { z } from 'zod';
 import { categorySchema } from '../schema/caetgorySchema';
 
 export const CategoryModal = ({ id }: { id: string }) => {
-  const { categoryMethod, onEditSubmit, isEditLoading } = useCategoryForm();
-  const [isEdit, setIsEdit] = useState(false);
+  const [open, setOpen] = useState(false);
   const [currentId, setId] = useState('');
+
+  const { categoryMethod, onEditSubmit, isEditLoading } = useCategoryForm();
 
   const onSubmit = (data: z.infer<typeof categorySchema>) => {
     onEditSubmit({ name: data?.name, id: currentId });
@@ -21,7 +22,6 @@ export const CategoryModal = ({ id }: { id: string }) => {
   const { data: categoryDetail, isLoading: getCategoryLoading } =
     useGetCategoryDetail({
       id: currentId,
-      isDisabled: !isEdit,
     });
 
   useEffect(() => {
@@ -34,7 +34,6 @@ export const CategoryModal = ({ id }: { id: string }) => {
 
   const closeHandler = () => {
     categoryMethod.reset({ name: '' });
-    setIsEdit(false);
     setId('');
   };
 
@@ -48,7 +47,6 @@ export const CategoryModal = ({ id }: { id: string }) => {
           px={0}
           onClick={() => {
             setId(id);
-            setIsEdit(true);
           }}
           loading={isEditLoading}
         >
@@ -60,6 +58,8 @@ export const CategoryModal = ({ id }: { id: string }) => {
       isLoading={isEditLoading || getCategoryLoading}
       headerTitle="Add Category"
       onClose={closeHandler}
+      open={open}
+      setOpen={setOpen}
     >
       {getCategoryLoading ? (
         <VStack width={'100%'}>
