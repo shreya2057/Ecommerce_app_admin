@@ -51,18 +51,12 @@ const getCategoryDetail = (id: string) => {
   );
 };
 
-export const useGetCategoryDetail = ({
-  id,
-  isDisabled,
-}: {
-  id: string;
-  isDisabled: boolean;
-}) => {
+export const useGetCategoryDetail = ({ id }: { id: string }) => {
   return useQuery({
     queryKey: [API_ENDPOINTS.CATEGORIES.GET_DETAIL, id],
     queryFn: () => getCategoryDetail(id),
     select: (response) => response?.data?.data,
-    enabled: !!id && !isDisabled,
+    enabled: !!id,
   });
 };
 

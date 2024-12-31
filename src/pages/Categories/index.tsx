@@ -14,8 +14,10 @@ import { CategoryType } from './type';
 import { Button } from '@/components/ui/button';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/routes/routes.constants';
+import { useState } from 'react';
 
 export const Categories = () => {
+  const [open, setOpen] = useState(false);
   const { data: categories, isLoading: isListLoading } = useGetCategories();
   const { categoryMethod, onSubmit, isLoading, onEditSubmit, isEditLoading } =
     useCategoryForm();
@@ -37,6 +39,7 @@ export const Categories = () => {
     },
     {
       header: 'No of products',
+      accessorKey: 'no_of_products',
     },
     {
       header: 'View Products',
@@ -108,6 +111,8 @@ export const Categories = () => {
           isLoading={isLoading}
           headerTitle="Add Category"
           onClose={closeHandler}
+          setOpen={setOpen}
+          open={open}
         >
           <FormControl
             control={categoryMethod.control}

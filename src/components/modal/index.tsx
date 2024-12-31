@@ -11,7 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../ui/dialog';
-import { useState } from 'react';
 import { Button } from '../ui/button';
 
 export const DialogBox = ({
@@ -24,11 +23,11 @@ export const DialogBox = ({
   onSubmit,
   onClose,
   id,
+  open,
+  setOpen,
 }: DialogBoxProps) => {
-  const [open, setOpen] = useState(false);
   const onSave = async () => {
     await onSubmit();
-    setOpen(false);
   };
   return (
     <DialogRoot
@@ -86,4 +85,6 @@ type DialogBoxProps = {
   onSubmit: () => Promise<void>;
   onClose?: () => void;
   id?: string;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };

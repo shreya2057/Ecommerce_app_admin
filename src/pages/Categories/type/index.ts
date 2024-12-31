@@ -5,4 +5,5 @@ export type CategoryType = {
   is_deleted: boolean;
   createdAt: string;
   updatedAt?: string;
+  no_of_products: number;
 };

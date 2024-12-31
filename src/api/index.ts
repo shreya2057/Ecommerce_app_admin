@@ -6,4 +6,9 @@ export const API_ENDPOINTS = {
     GET_DETAIL: '/categories/get-category/:id/',
     UPDATE_DETAIL: '/categories/update-category/:id/',
   },
+  PRODUCTS: {
+    GET: '/products/get-categories-products/:id/',
+    POST: '/products/add-products/:id/',
+    GET_DETAIL: '/products/product-detail/:id/',
+  },
 };
